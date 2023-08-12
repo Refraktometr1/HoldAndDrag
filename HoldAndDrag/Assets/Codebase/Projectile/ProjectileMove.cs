@@ -12,12 +12,6 @@ namespace Codebase.Projectile
         
         private float _elapsedTime;
 
-        private void Start()
-        {
-            MoveGameObject(this.gameObject, _target.gameObject, _animationTime);
-        }
-
-
         public void MoveGameObject(GameObject gameObject, GameObject endPositionGO,  float animationTime)
         {
             StartCoroutine(AnimatorMove(gameObject, endPositionGO, animationTime));
