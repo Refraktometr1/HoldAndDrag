@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using Codebase.Services;
 using UnityEngine;
+using Zenject;
 
 namespace Codebase.Projectile
 {
@@ -11,6 +12,14 @@ namespace Codebase.Projectile
         [SerializeField] private GameObject _target;
         
         private float _elapsedTime;
+        private BezierCurve _bezierCurve;
+
+        [Inject]
+        public void Construct(BezierCurve bezierCurve)
+        {
+            _bezierCurve = bezierCurve;
+        }
+
 
         public void MoveGameObject(GameObject gameObject, GameObject endPositionGO,  float animationTime)
         {
@@ -27,7 +36,7 @@ namespace Codebase.Projectile
                 _elapsedTime += Time.deltaTime;
                 var percentageComplete =  _elapsedTime / animationTime;
             
-                movedGameObject.transform.position = BezierCurvePoint
+                movedGameObject.transform.position = _bezierCurve.GetPoint
                 (startPosition,
                     _offsetPoint.transform.position,
                     endPositionGO.transform.position,
@@ -37,15 +46,6 @@ namespace Codebase.Projectile
             }
             movedGameObject.SetActive(false);
             _elapsedTime = 0;
-        }
-        
-        private Vector3 BezierCurvePoint(Vector3 p0, Vector3 p1, Vector3 p2, float t)
-        {
-            t = Mathf.Clamp01(t);
-            return
-                Mathf.Pow(1 - t,2) * p0 +
-                2f * (1 - t)* t * p1 +
-                t * t * p2;
         }
     }
 }

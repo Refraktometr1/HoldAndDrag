@@ -1,5 +1,6 @@
 ﻿using Codebase.Factory;
 using Codebase.Infrastructure.States;
+using Codebase.Services;
 using Unity.VisualScripting;
 using Zenject;
 
@@ -13,6 +14,7 @@ namespace Codebase.Infrastructure
             Container.Bind<LoadLevelState>().AsSingle();
             Container.Bind<GameLoopState>().AsSingle();
             Container.Bind<GameFactory>().AsSingle();
+            Container.Bind<BezierCurve>().AsSingle();
         }
     }
 }
