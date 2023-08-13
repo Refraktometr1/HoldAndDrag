@@ -8,8 +8,6 @@ namespace Codebase.Projectile
     public class ProjectileMove : MonoBehaviour
     {
         [SerializeField] private GameObject _offsetPoint;
-        [SerializeField] private float _animationTime = 1f;
-        [SerializeField] private GameObject _target;
         
         private float _elapsedTime;
         private BezierCurve _bezierCurve;

@@ -6,11 +6,6 @@ namespace Codebase.Obstacles
 {
     public class Obstacle : MonoBehaviour, ISliceable
     {
-        private void Start()
-        {
-            DoSlice(GetRandomPlane(this.transform.position, this.transform.localScale));
-        }
-
         public void DoSlice(EzySlice.Plane plane)
         {
            var slices = this.gameObject.SliceInstantiate(plane, 
