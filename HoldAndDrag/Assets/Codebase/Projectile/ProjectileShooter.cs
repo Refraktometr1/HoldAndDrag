@@ -29,7 +29,7 @@ namespace Codebase.Projectile
         private void OnMouseUp()
         {
             ProjectileMove.MoveGameObject(this.gameObject, Target, AnimationTime);
-            TrajectoryRendererGameObject.SetActive(false);
+            Destroy(TrajectoryRendererGameObject);
         }
     }
 }

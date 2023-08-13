@@ -11,6 +11,8 @@ namespace Codebase.Projectile
             
             if (sliceble != null) 
                 sliceble.DoSlice(new EzySlice.Plane(this.transform.position / 2, transform.up));
+
+            
         }
     }
     

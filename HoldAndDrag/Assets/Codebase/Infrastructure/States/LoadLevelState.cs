@@ -32,6 +32,9 @@ namespace Codebase.Infrastructure.States
             var card = _gameFactory.CreateCard();
             
             _gameFactory.CreateObstacles(card, target);
+
+            var canvas = _gameFactory.CreateMainCanvas();
+            _gameFactory.CreateNewCardButton(canvas.transform);
         }
 
         public void Enter()

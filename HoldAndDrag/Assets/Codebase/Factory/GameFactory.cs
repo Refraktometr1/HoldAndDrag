@@ -1,6 +1,7 @@
 ﻿using Codebase.Projectile;
 using Codebase.Services;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Codebase.Factory
@@ -58,6 +59,15 @@ namespace Codebase.Factory
             
             GameObject obstacleGameObject2 = Object.Instantiate(Resources.Load<GameObject>("Obstacle"));
             obstacleGameObject2.transform.position = Vector3.Lerp(card.transform.position, target.transform.position, 0.5f) + Vector3.left*2; 
+        }
+        
+        public GameObject CreateMainCanvas() => Object.Instantiate(Resources.Load<GameObject>("UI/Canvas"));
+
+        public void CreateNewCardButton(Transform parent)
+        {
+            var cardGameObject = Object.Instantiate(Resources.Load<GameObject>("UI/NewCard"), parent);
+            var cardButton = cardGameObject.GetComponent<Button>();
+            cardButton.onClick.AddListener(()=> CreateCard());
         }
     }
 }
