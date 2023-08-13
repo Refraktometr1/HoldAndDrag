@@ -8,6 +8,7 @@ namespace Codebase.Factory
     public class GameFactory
     {
         private BezierCurve _bezierCurve;
+        private GameObject _target;
         
         [Inject]
         public void Construct(BezierCurve bezierCurve)
@@ -15,13 +16,12 @@ namespace Codebase.Factory
             _bezierCurve = bezierCurve;
         }
 
-
-        public GameObject CreateCard(GameObject target)
+        public GameObject CreateCard()
         {
             GameObject cardGameObject = Object.Instantiate(Resources.Load<GameObject>("Card"));
             
             GameObject offsetPoint = Object.Instantiate(Resources.Load<GameObject>("OffsetPoint"));
-            offsetPoint.transform.position = Vector3.Lerp(target.transform.position, cardGameObject.transform.position, 0.5f);
+            offsetPoint.transform.position = Vector3.Lerp(_target.transform.position, cardGameObject.transform.position, 0.5f);
 
             var projectileMove = cardGameObject.GetComponent<ProjectileMove>();
             projectileMove.OffsetPoint = offsetPoint;
@@ -29,20 +29,24 @@ namespace Codebase.Factory
             
             GameObject trajectoryRendererGameObject = Object.Instantiate(Resources.Load<GameObject>("TrajectoryRenderer"));
             var trajectoryRenderer = trajectoryRendererGameObject.GetComponent<TrajectoryRenderer>();
-            trajectoryRenderer.EndPoint = target;
+            trajectoryRenderer.EndPoint = _target;
             trajectoryRenderer.OffsetPoint = offsetPoint;
             trajectoryRenderer.StartPoint = cardGameObject;
             trajectoryRenderer.BezierCurve = _bezierCurve;
             
             var projectileShooter = cardGameObject.GetComponent<ProjectileShooter>();
             projectileShooter.OffsetPoint = offsetPoint;
-            projectileShooter.Target = target;
+            projectileShooter.Target = _target;
             projectileShooter.TrajectoryRendererGameObject = trajectoryRendererGameObject;
 
             return cardGameObject;
         }
 
-        public GameObject CreateTarget() => Object.Instantiate(Resources.Load<GameObject>("Target"));
+        public GameObject CreateTarget()
+        {
+            _target = Object.Instantiate(Resources.Load<GameObject>("Target"));
+            return _target;
+        }
 
         public void CreateObstacles(GameObject card, GameObject target)
         {
