@@ -13,6 +13,9 @@ namespace Codebase.Projectile
 
         private LineRenderer _trajectoryLineRenderer;
         private BezierCurve _bezierCurve;
+        
+        private const int TrajectoryPointCount = 20;
+        
 
         [Inject]
         public void Construct(BezierCurve bezierCurve)
@@ -33,12 +36,13 @@ namespace Codebase.Projectile
 
         private void ShowTrajectory()
         {
-            Vector3[] points = new Vector3[20];
+            Vector3[] points = new Vector3[TrajectoryPointCount];
             _trajectoryLineRenderer.positionCount = points.Length;
 
             for (int i = 0; i < points.Length; i++)
             {
-                points[i] = _bezierCurve.GetPoint(StartPoint.transform.position, OffsetPoint.transform.position, EndPoint.transform.position, (i+1) * 0.05f);
+                float extrapolationCoefficient = (i + 1) * (1 / (float)TrajectoryPointCount);
+                points[i] = _bezierCurve.GetPoint(StartPoint.transform.position, OffsetPoint.transform.position, EndPoint.transform.position, extrapolationCoefficient);
             }
             
             _trajectoryLineRenderer.SetPositions(points);
