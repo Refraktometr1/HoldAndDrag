@@ -28,9 +28,14 @@ namespace Codebase.Infrastructure.States
 
         private void OnLoaded(AsyncOperation obj)
         {
+            CreateGameWorld();
+            _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void CreateGameWorld()
+        {
             var target = _gameFactory.CreateTarget();
             var card = _gameFactory.CreateCard();
-            
             _gameFactory.CreateObstacles(card, target);
 
             var canvas = _gameFactory.CreateMainCanvas();

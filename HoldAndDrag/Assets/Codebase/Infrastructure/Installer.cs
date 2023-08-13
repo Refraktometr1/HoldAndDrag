@@ -15,6 +15,7 @@ namespace Codebase.Infrastructure
             Container.Bind<GameLoopState>().AsSingle();
             Container.Bind<GameFactory>().AsSingle();
             Container.Bind<BezierCurve>().AsSingle();
+            Container.Bind<CardsService>().AsSingle();
         }
     }
 }

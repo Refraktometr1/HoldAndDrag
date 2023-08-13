@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d405970281a42999563c4789f3c9d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offsetPoint: {fileID: 0}
+  OffsetPoint: {fileID: 0}
 --- !u!114 &1825991569048613182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,11 +142,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: facfd5619ddc49fc9c550f7422ee7048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ProjectileMove: {fileID: 1825991569048613183}
   OffsetPoint: {fileID: 0}
   Target: {fileID: 0}
-  ProjectileMove: {fileID: 1825991569048613183}
   TrajectoryRendererGameObject: {fileID: 0}
-  AnimationTime: 3
+  AnimationTime: 2
 --- !u!114 &1825991569048613120
 MonoBehaviour:
   m_ObjectHideFlags: 0

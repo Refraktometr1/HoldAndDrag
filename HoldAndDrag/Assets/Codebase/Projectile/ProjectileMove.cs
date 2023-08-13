@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using Codebase.Services;
 using UnityEngine;
-using Zenject;
 
 namespace Codebase.Projectile
 {
@@ -9,6 +8,7 @@ namespace Codebase.Projectile
     {
         public GameObject OffsetPoint;
         public BezierCurve BezierCurve;
+        public bool isEndMove;
 
         private float _elapsedTime;
 
@@ -33,7 +33,8 @@ namespace Codebase.Projectile
                 );
                 yield return null;
             }
-            movedGameObject.SetActive(false);
+
+            isEndMove = true;
             _elapsedTime = 0;
         }
     }

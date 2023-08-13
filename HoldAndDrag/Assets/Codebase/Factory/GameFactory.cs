@@ -1,4 +1,6 @@
-﻿using Codebase.Projectile;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Codebase.Projectile;
 using Codebase.Services;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +10,17 @@ namespace Codebase.Factory
 {
     public class GameFactory
     {
+        public List<ProjectileMove> CardsMovers = new List<ProjectileMove>();
+        
         private BezierCurve _bezierCurve;
         private GameObject _target;
-        
+        private CardsService _cardsService;
+
         [Inject]
-        public void Construct(BezierCurve bezierCurve)
+        public void Construct(BezierCurve bezierCurve, CardsService cardsService)
         {
             _bezierCurve = bezierCurve;
+            _cardsService = cardsService;
         }
 
         public GameObject CreateCard()
@@ -27,6 +33,7 @@ namespace Codebase.Factory
             var projectileMove = cardGameObject.GetComponent<ProjectileMove>();
             projectileMove.OffsetPoint = offsetPoint;
             projectileMove.BezierCurve = _bezierCurve;
+            CardsMovers.Add(projectileMove);
             
             GameObject trajectoryRendererGameObject = Object.Instantiate(Resources.Load<GameObject>("TrajectoryRenderer"));
             var trajectoryRenderer = trajectoryRendererGameObject.GetComponent<TrajectoryRenderer>();
@@ -39,7 +46,7 @@ namespace Codebase.Factory
             projectileShooter.OffsetPoint = offsetPoint;
             projectileShooter.Target = _target;
             projectileShooter.TrajectoryRendererGameObject = trajectoryRendererGameObject;
-
+            
             return cardGameObject;
         }
 
@@ -67,7 +74,7 @@ namespace Codebase.Factory
         {
             var cardGameObject = Object.Instantiate(Resources.Load<GameObject>("UI/NewCard"), parent);
             var cardButton = cardGameObject.GetComponent<Button>();
-            cardButton.onClick.AddListener(()=> CreateCard());
+            cardButton.onClick.AddListener(()=> _cardsService.CreateNewCard());
         }
     }
 }

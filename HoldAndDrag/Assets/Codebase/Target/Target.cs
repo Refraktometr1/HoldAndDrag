@@ -1,10 +1,11 @@
-﻿namespace Codebase.Target
+﻿using UnityEngine;
+
+namespace Codebase.Target
 {
-    public class Target : Itarget
+    public class Target : MonoBehaviour, Itarget
     {
-        public void Hit()
-        {
-            
-        }
+        [SerializeField] AudioSource _audioSource;
+
+        public void Hit() => _audioSource.Play();
     }
 }
