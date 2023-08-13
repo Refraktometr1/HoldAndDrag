@@ -22,17 +22,12 @@ namespace Codebase.Projectile
             _offsetPointPosition = OffsetPoint.transform.position;
         }
 
-        private void OnMouseDown()
-        {
-            _startPosition = Input.mousePosition;
-        }
+        private void OnMouseDown() => _startPosition = Input.mousePosition;
 
         private void OnMouseDrag()
         {   
             _endPosition = Input.mousePosition;
-
             _offset = Vector3.Project(_endPosition - _startPosition, Vector3.right) ;
-
             OffsetPoint.transform.position = _offsetPointPosition + _offset * 0.01f;
         }
 
@@ -40,8 +35,6 @@ namespace Codebase.Projectile
         {
             ProjectileMove.MoveGameObject(this.gameObject, Target, AnimationTime);
             TrajectoryRendererGameObject.SetActive(false);
-            _endPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            _isdrag = false;
         }
     }
 }

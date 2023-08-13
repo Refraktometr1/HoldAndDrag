@@ -78,6 +78,7 @@ namespace EzySlice {
             GameObject lowerHull = slice.CreateLowerHull(obj, crossSectionMaterial);
 
             if (upperHull != null && lowerHull != null) {
+                upperHull.transform.position += Vector3.up;
                 return new GameObject[] { upperHull, lowerHull };
             }
 

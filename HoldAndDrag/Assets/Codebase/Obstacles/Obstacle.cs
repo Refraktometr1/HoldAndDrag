@@ -1,6 +1,5 @@
 ﻿using EzySlice;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Codebase.Obstacles
 {
@@ -8,7 +7,7 @@ namespace Codebase.Obstacles
     {
         public void DoSlice(EzySlice.Plane plane)
         {
-           var slices = this.gameObject.SliceInstantiate(plane, 
+           var slices = gameObject.SliceInstantiate(plane, 
                new TextureRegion(0.0f, 0.0f, 1.0f, 1.0f),
                this.GetComponent<Renderer>().material
                );
@@ -22,22 +21,7 @@ namespace Codebase.Obstacles
                }
            }
            
-           this.gameObject.SetActive(false);
+           gameObject.SetActive(false);
         }
-
-        private EzySlice.Plane GetRandomPlane(Vector3 positionOffset, Vector3 scaleOffset) {
-            Vector3 randomPosition = Random.insideUnitSphere;
-
-            //randomPosition += positionOffset;
-
-            Vector3 randomDirection = Random.insideUnitSphere.normalized;
-
-            return new EzySlice.Plane(randomPosition, randomDirection);
-        }
-    }
-
-    public interface ISliceable
-    {
-        public void DoSlice(EzySlice.Plane plane);
     }
 }
