@@ -9,10 +9,8 @@ namespace Codebase.Projectile
         {
             var sliceble = other.gameObject.GetComponent<ISliceable>();
             
-            if (sliceble != null)
-            {
-                sliceble.DoSlice(new EzySlice.Plane(this.transform.position/2, transform.up));
-            }
+            if (sliceble != null) 
+                sliceble.DoSlice(new EzySlice.Plane(this.transform.position / 2, transform.up));
         }
     }
     

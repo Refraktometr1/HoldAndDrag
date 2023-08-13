@@ -1,6 +1,5 @@
 ﻿using Codebase.Services;
 using UnityEngine;
-using Zenject;
 
 namespace Codebase.Projectile
 {
@@ -9,18 +8,11 @@ namespace Codebase.Projectile
         public GameObject StartPoint;
         public GameObject OffsetPoint;
         public GameObject EndPoint;
+        public BezierCurve BezierCurve;
 
         private LineRenderer _trajectoryLineRenderer;
-        private BezierCurve _bezierCurve;
-        
-        private const int TrajectoryPointCount = 20;
-        
 
-        [Inject]
-        public void Construct(BezierCurve bezierCurve)
-        {
-            _bezierCurve = bezierCurve;
-        }
+        private const int TrajectoryPointCount = 20;
 
         private void Start()
         {
@@ -41,7 +33,7 @@ namespace Codebase.Projectile
             for (int i = 0; i < points.Length; i++)
             {
                 float extrapolationCoefficient = (i + 1) * (1 / (float)TrajectoryPointCount);
-                points[i] = _bezierCurve.GetPoint(StartPoint.transform.position, OffsetPoint.transform.position, EndPoint.transform.position, extrapolationCoefficient);
+                points[i] = BezierCurve.GetPoint(StartPoint.transform.position, OffsetPoint.transform.position, EndPoint.transform.position, extrapolationCoefficient);
             }
             
             _trajectoryLineRenderer.SetPositions(points);

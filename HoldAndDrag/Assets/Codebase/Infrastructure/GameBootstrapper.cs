@@ -20,6 +20,5 @@ namespace Codebase.Infrastructure
         {
             _stateMachine.Enter<LoadLevelState, string>("Main");
         }
-        
     }
 }

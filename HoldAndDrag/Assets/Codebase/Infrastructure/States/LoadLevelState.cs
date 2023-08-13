@@ -28,7 +28,10 @@ namespace Codebase.Infrastructure.States
 
         private void OnLoaded(AsyncOperation obj)
         {
+            var target = _gameFactory.CreateTarget();
+            var card = _gameFactory.CreateCard(target);
             
+            _gameFactory.CreateObstacles(card, target);
         }
 
         public void Enter()

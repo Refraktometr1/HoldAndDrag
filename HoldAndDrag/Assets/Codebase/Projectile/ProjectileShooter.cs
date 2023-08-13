@@ -4,9 +4,9 @@ namespace Codebase.Projectile
 {
     public class ProjectileShooter : MonoBehaviour
     {
+        public ProjectileMove ProjectileMove;
         public GameObject OffsetPoint;
         public GameObject Target;
-        public ProjectileMove ProjectileMove;
         public GameObject TrajectoryRendererGameObject;
         public int AnimationTime = 1;
         
@@ -15,12 +15,7 @@ namespace Codebase.Projectile
         private Vector3 _offset;
         private Vector3 _offsetPointPosition;
 
-        private bool _isdrag;
-
-        private void Start()
-        {
-            _offsetPointPosition = OffsetPoint.transform.position;
-        }
+        private void Start() => _offsetPointPosition = OffsetPoint.transform.position;
 
         private void OnMouseDown() => _startPosition = Input.mousePosition;
 
