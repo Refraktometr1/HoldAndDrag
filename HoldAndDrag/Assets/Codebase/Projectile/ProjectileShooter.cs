@@ -23,7 +23,7 @@ namespace Codebase.Projectile
         {   
             _endPosition = Input.mousePosition;
             _offset = Vector3.Project(_endPosition - _startPosition, Vector3.right) ;
-            OffsetPoint.transform.position = _offsetPointPosition + _offset * 0.01f;
+            OffsetPoint.transform.position = _offsetPointPosition + _offset * 0.03f;
         }
 
         private void OnMouseUp()
